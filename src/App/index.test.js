@@ -1,5 +1,17 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import App from "./App";
+import App from ".";
+
+test("renders a list of posts with one item", async () => {
+  render(<App />);
+
+  const list = await screen.findByRole("list");
+  expect(list.children).toHaveLength(1);
+
+  // console.log(screen.debug());
+
+  const noPosts = screen.queryByText("No posts", { exact: false });
+  expect(noPosts).not.toBeInTheDocument();
+});
 
 test("button has correct intial color", () => {
   render(<App />);
@@ -17,12 +29,12 @@ test("button turns blue and text is changed when clicked", () => {
   fireEvent.click(colorButton);
   expect(colorButton).toHaveStyle({ backgroundColor: "MidnightBlue" });
 
-  expect(colorButton.textContent).toBe("Change to Medium Violet Red");
+  expect(colorButton).toHaveTextContent("Change to Medium Violet Red");
 });
 
 test("initial conditions", () => {
   render(<App />);
-  // check that the buttons starts out enabled
+  // check that the button starts out enabled
   const colorButton = screen.getByRole("button", {
     name: "Change to Midnight Blue",
   });

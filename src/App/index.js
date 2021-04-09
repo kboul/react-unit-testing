@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./index.css";
+import Posts from "../features/Posts";
 
-import replaceCamelWithSpaces from "./utils/index";
+import replaceCamelWithSpaces from "../utils/index";
 
 export default function App() {
   const [buttonColor, setButonColor] = useState("MediumVioletRed");
@@ -31,6 +31,8 @@ export default function App() {
         value={checkboxValue}
       />
       <label htmlFor='disable-button-checkbox'>Disable button</label>
+
+      <Posts />
     </div>
   );
 }
